@@ -20,7 +20,6 @@ function Form() {
       const URL = 'https://swapi-trybe.herokuapp.com/api/planets/';
       const planetsList = await fetch(URL).then((resolve) => resolve.json());
       setPlanetsInfo(planetsList.results);
-      console.log(Object.keys(planetsList.results[0]));
     }; getInicialPlanetsAPI();
   }, []);
   return (
