@@ -12,7 +12,7 @@ function Form() {
     rotation_period: { hasFilter: false, logicalOperators: () => true },
     surface_water: { hasFilter: false, logicalOperators: () => true },
   };
-  const [plantsInfo, setPlanetsInfo] = useState([]);
+  const [planetsInfo, setPlanetsInfo] = useState([]);
   const [namePlanetsSearch, SetNamePlanetsSearch] = useState('');
   const [filterPlanet, setFilterPlanet] = useState(inicialFilterState);
   useEffect(() => {
@@ -25,7 +25,7 @@ function Form() {
   return (
     <MyContext.Provider
       value={
-        { plantsInfo,
+        { planetsInfo,
           namePlanetsSearch,
           SetNamePlanetsSearch,
           filterPlanet,

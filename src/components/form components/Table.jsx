@@ -40,7 +40,11 @@ function Table() {
       </thead>
       <tbody>
         <MyContext.Consumer>
-          { ({ plantsInfo }) => plantsInfo.map((planet) => renderList(planet))}
+          { ({ planetsInfo, namePlanetsSearch }) => {
+            const planetsNameFiltered = planetsInfo
+              .filter(({ name }) => name.includes(namePlanetsSearch));
+            return planetsNameFiltered.map((planet) => renderList(planet));
+          }}
         </MyContext.Consumer>
       </tbody>
     </table>
