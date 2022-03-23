@@ -44,12 +44,9 @@ function Table() {
             let planetsFiltered = planetsInfo
               .filter(({ name }) => name.includes(namePlanetsSearch));
 
-            const newFilterPlanet = Object.entries(filterPlanet)
-              .filter(([, { hasFilter }]) => hasFilter);
-
-            newFilterPlanet.forEach(([column, { logicalOperators }]) => {
+            filterPlanet.forEach(({ filterColumn, logicalOperators }) => {
               planetsFiltered = planetsFiltered
-                .filter((element) => logicalOperators(element[column]));
+                .filter((element) => logicalOperators(element[filterColumn]));
             });
 
             return planetsFiltered.map((planet) => renderList(planet));

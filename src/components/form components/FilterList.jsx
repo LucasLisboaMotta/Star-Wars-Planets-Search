@@ -4,19 +4,16 @@ import MyContext from '../../context/MyContext';
 function FilterList() {
   const renderFilter = (filterPlanet, setFilterPlanet) => {
     const removeFilter = (column) => {
-      setFilterPlanet({ ...filterPlanet, [column]: { hasFilter: false } });
+      setFilterPlanet(filterPlanet.filter(({ filterColumn }) => filterColumn !== column));
     };
 
-    const filteredOptions = Object.entries(filterPlanet)
-      .filter(([, { hasFilter }]) => hasFilter);
-
     return (
-      filteredOptions.map(([column, { phrase }]) => (
-        <li key={ column } data-testid="filter">
+      filterPlanet.map(({ filterColumn, phrase }) => (
+        <li key={ filterColumn } data-testid="filter">
           {phrase}
           <button
             type="button"
-            onClick={ () => removeFilter(column) }
+            onClick={ () => removeFilter(filterColumn) }
           >
             X
           </button>

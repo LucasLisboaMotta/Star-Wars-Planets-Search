@@ -12,9 +12,9 @@ function Filter() {
   const columnOptions = (filterPlanet) => {
     const filteredOptions = inicialColumns
       .filter((currentColumn) => filterPlanet
-        .every(([filterColumn]) => filterColumn !== currentColumn));
+        .every(({ filterColumn }) => filterColumn !== currentColumn));
     return (
-      filteredOptions.map(([option]) => (
+      filteredOptions.map((option) => (
         <option key={ option } value={ option }>{option}</option>
       ))
     );
@@ -28,11 +28,11 @@ function Filter() {
 
   const buttonFilter = (filterPlanet, setFilterPlanet) => {
     const newFilterPlanet = {
-      hasFilter: true,
+      filterColumn: column,
       logicalOperators: logicalFuncs[comparison](numberValue),
       phrase: `${column} ${comparison} ${numberValue}`,
     };
-    setFilterPlanet({ ...filterPlanet, [column]: newFilterPlanet });
+    setFilterPlanet([...filterPlanet, newFilterPlanet]);
     setColumn('');
     setNumberValue(0);
   };
