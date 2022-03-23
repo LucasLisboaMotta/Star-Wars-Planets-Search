@@ -1,30 +1,18 @@
 import React, { useState } from 'react';
 import MyContext from '../../context/MyContext';
 
-// population,
-// orbital_period,
-// diameter,
-// rotation_period,
-// surface_water,
-// data-testid='column-filter'
-
-// menor que  less than
-// maior que  greater than
-// igual a  equal to
-// data-testid='comparison-filter'
-
-// data-testid='value-filter'
-
-// data-testid='button-filter'
-
 function Filter() {
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [numberValue, setNumberValue] = useState(0);
 
+  const inicialColumns = ['population',
+    'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+
   const columnOptions = (filterPlanet) => {
-    const filteredOptions = Object.entries(filterPlanet)
-      .filter(([, { hasFilter }]) => !hasFilter);
+    const filteredOptions = inicialColumns
+      .filter((currentColumn) => filterPlanet
+        .every(([filterColumn]) => filterColumn !== currentColumn));
     return (
       filteredOptions.map(([option]) => (
         <option key={ option } value={ option }>{option}</option>
@@ -42,6 +30,7 @@ function Filter() {
     const newFilterPlanet = {
       hasFilter: true,
       logicalOperators: logicalFuncs[comparison](numberValue),
+      phrase: `${column} ${comparison} ${numberValue}`,
     };
     setFilterPlanet({ ...filterPlanet, [column]: newFilterPlanet });
     setColumn('');
