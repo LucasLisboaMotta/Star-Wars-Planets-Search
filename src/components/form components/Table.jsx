@@ -4,7 +4,7 @@ import MyContext from '../../context/MyContext';
 function Table() {
   const renderList = (planet) => (
     <tr key={ planet.name }>
-      <td>{planet.name}</td>
+      <td data-testid="planet-name">{planet.name}</td>
       <td>{planet.rotation_period}</td>
       <td>{planet.orbital_period}</td>
       <td>{planet.diameter}</td>
@@ -40,7 +40,7 @@ function Table() {
       </thead>
       <tbody>
         <MyContext.Consumer>
-          { ({ planetsInfo, namePlanetsSearch, filterPlanet }) => {
+          { ({ planetsInfo, namePlanetsSearch, filterPlanet, sortColumns }) => {
             let planetsFiltered = planetsInfo
               .filter(({ name }) => name.includes(namePlanetsSearch));
 
@@ -48,6 +48,7 @@ function Table() {
               planetsFiltered = planetsFiltered
                 .filter((element) => logicalOperators(element[filterColumn]));
             });
+            if (planetsFiltered.length > 1) planetsFiltered.sort(sortColumns);
 
             return planetsFiltered.map((planet) => renderList(planet));
           }}
