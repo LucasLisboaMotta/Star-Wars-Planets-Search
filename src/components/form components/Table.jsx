@@ -40,10 +40,19 @@ function Table() {
       </thead>
       <tbody>
         <MyContext.Consumer>
-          { ({ planetsInfo, namePlanetsSearch }) => {
-            const planetsNameFiltered = planetsInfo
+          { ({ planetsInfo, namePlanetsSearch, filterPlanet }) => {
+            let planetsFiltered = planetsInfo
               .filter(({ name }) => name.includes(namePlanetsSearch));
-            return planetsNameFiltered.map((planet) => renderList(planet));
+
+            const newFilterPlanet = Object.entries(filterPlanet)
+              .filter(([, { hasFilter }]) => hasFilter);
+
+            newFilterPlanet.forEach(([column, { logicalOperators }]) => {
+              planetsFiltered = planetsFiltered
+                .filter((element) => logicalOperators(element[column]));
+            });
+
+            return planetsFiltered.map((planet) => renderList(planet));
           }}
         </MyContext.Consumer>
       </tbody>

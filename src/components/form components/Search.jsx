@@ -3,19 +3,21 @@ import MyContext from '../../context/MyContext';
 
 function Search() {
   return (
-    <div>
-      <label htmlFor="search">
-        Planet Name
-        <MyContext.Consumer>
-          { ({ namePlanetsSearch, SetNamePlanetsSearch }) => (<input
-            id="search"
-            value={ namePlanetsSearch }
-            onChange={ ({ target: { value } }) => SetNamePlanetsSearch(value) }
-            data-testid="name-filter"
-          />)}
-        </MyContext.Consumer>
-      </label>
-    </div>
+    <MyContext.Consumer>
+      { ({ namePlanetsSearch, SetNamePlanetsSearch }) => (
+        <div>
+          <label htmlFor="search">
+            Planet Name
+            <input
+              id="search"
+              value={ namePlanetsSearch }
+              onChange={ ({ target: { value } }) => SetNamePlanetsSearch(value) }
+              data-testid="name-filter"
+            />
+          </label>
+        </div>
+      )}
+    </MyContext.Consumer>
   );
 }
 
