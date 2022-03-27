@@ -48,7 +48,8 @@ function Table() {
               planetsFiltered = planetsFiltered
                 .filter((element) => logicalOperators(element[filterColumn]));
             });
-            if (planetsFiltered.length > 1) planetsFiltered.sort(sortColumns);
+
+            planetsFiltered.sort(sortColumns);
 
             return planetsFiltered.map((planet) => renderList(planet));
           }}
